@@ -3,8 +3,11 @@ from pathlib import Path
 import sys
 
 def run_tests(dir):
-    path = Path(__file__).parent / "tests/src" / dir
-    print(path)
+    path = Path(__file__).parent / "tests/src"
+    if dir == "all":
+        pass
+    else:   
+        path = path /  dir
     pytest.main([str(path), "-v"])
 
 
