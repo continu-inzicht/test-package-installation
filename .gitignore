@@ -1,0 +1,18 @@
+# . files
+.ipynb_checkpoints
+.idea
+.env
+.coverage
+.vscode
+.pytest_cache
+
+# Tests - obtain them from the repo
+tests
+tests/**
+
+# testing
+hidden_*
+hidden-*
+
+# cache:
+__pycache__
