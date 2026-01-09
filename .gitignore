@@ -10,9 +10,18 @@
 tests
 tests/**
 
+# logging
+*.log
+
 # testing
 hidden_*
 hidden-*
+# nox files
+*.egg-info
+build
+.nox
+.benchmarks
+.python-version
 
 # cache:
 __pycache__
