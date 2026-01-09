@@ -18,7 +18,9 @@ jobs:
       - name: Check out TBCI repository
         uses: actions/checkout@v4 
         with:
-          repository: continu-inzicht/toolbox-continu-inzicht
+          # this still needs adjusting if we want this on a PR 
+          # we can also run this locally manuall & check on github later once in main
+          repository: continu-inzicht/toolbox-continu-inzicht 
           path: toolbox-continu-inzicht
           lfs: true
 
@@ -31,11 +33,11 @@ jobs:
           version: "0.9.3"
 
       - name: Copy github secrets to environment variables files
-        working-directory: continu_inzicht
+        # remove get content if add secrets later
         run: |
-            touch .env
-            echo TBCI_MAIN_REPO_PATH=" D:\a\test-package-installation\test-package-installation\toolbox-continu-inzicht" >> .env
-            cat .env
+            Add-Content -Path .env -Value 'TBCI_MAIN_REPO_PATH=D:\a\test-package-installation\test-package-installation\toolbox-continu-inzicht'
+            Get-Content .env
+        shell: pwsh
       - name: Install the project
         run: uv sync --locked
 
