@@ -44,8 +44,8 @@ jobs:
       - name: Copy github secrets to environment variables files
         # remove get content if add secrets later
         run: |
-            Add-Content -Path .env -Value "TBCI_MAIN_REPO_PATH=${{ github.workspace }}\toolbox-continu-inzicht"
-            Get-Content .env
+            Add-Content -Path ${{ github.workspace }}\test-package-installation\.env -Value "TBCI_MAIN_REPO_PATH=${{ github.workspace }}\toolbox-continu-inzicht"
+            Get-Content ${{ github.workspace }}\test-package-installation\.env 
         shell: pwsh
       - name: Install the project
         run: uv sync --locked
