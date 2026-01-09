@@ -26,7 +26,10 @@ jobs:
 
       - name: Check own repository
         uses: actions/checkout@v4
-
+        with:
+          repository: continu-inzicht/test-package-installation
+          path: test-package-installation 
+      
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
@@ -34,7 +37,7 @@ jobs:
       
       - name: debug
         run: | 
-            ls ${{ github.workspace }}
+            ls ${{ github.workspace }}\test-package-installation 
             ls ${{ github.workspace }}\toolbox-continu-inzicht"
             ls ${{ github.workspace }}\toolbox-continu-inzicht//src"
         shell: pwsh
