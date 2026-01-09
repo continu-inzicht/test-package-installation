@@ -38,8 +38,8 @@ jobs:
       - name: debug
         run: | 
             ls ${{ github.workspace }}\test-package-installation 
-            ls ${{ github.workspace }}\toolbox-continu-inzicht"
-            ls ${{ github.workspace }}\toolbox-continu-inzicht//src"
+            ls ${{ github.workspace }}\toolbox-continu-inzicht
+            ls ${{ github.workspace }}\toolbox-continu-inzicht\src
         shell: pwsh
       - name: Copy github secrets to environment variables files
         # remove get content if add secrets later
