@@ -12,7 +12,10 @@ concurrency:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
 
     # ${{ github.workspace }} is  the main folder
     # the two repos are then each deployed at a lower level
@@ -49,14 +52,24 @@ jobs:
         shell: pwsh
 
 
-      - name: set environment variables files
+      - name: set environment variables files (win)
         # remove get content if add secrets later
         # change if new python versions are supported
+        if: matrix.os == 'windows-latest'
         run: |
             Add-Content -Path ${{ github.workspace }}\test-package-installation\.env -Value "TBCI_MAIN_REPO_PATH=${{ github.workspace }}\toolbox-continu-inzicht"
             Add-Content -Path ${{ github.workspace }}\test-package-installation\.env -Value "PYTHON_VERSIONS=3.11,3.12,3.13"
             Get-Content ${{ github.workspace }}\test-package-installation\.env 
         shell: pwsh
+      - name: set environment variables files (linux)
+        # remove get content if add secrets later
+        # change if new python versions are supported
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+            echo "TBCI_MAIN_REPO_PATH=${{ github.workspace }}/toolbox-continu-inzicht" >> ${{ github.workspace }}/test-package-installation/.env
+            echo "PYTHON_VERSIONS=3.11,3.12,3.13" >> ${{ github.workspace }}/test-package-installation/.env
+            cat ${{ github.workspace }}/test-package-installation/.env
+        shell: bash
         
       - name: Install the project
         run: uv sync --locked
@@ -65,9 +78,4 @@ jobs:
       - name: Run Pytests
         run: uv run run_tests_uv.py log=false # in terminal rather than log file
         working-directory: test-package-installation
-
-      - name: Upload Benchmark Data
-        uses: actions/upload-artifact@v4
-        with:
-          name: benchmark-data
-          path: ${{ github.workspace }}\test-package-installation\.benchmarks\
+  
