@@ -1,8 +1,40 @@
 # Extra testing
 
-Sanitiy check to see if splitting pypi package it works.
+Check to see if splitting pypi package it works.
 
-## route 1: manually via conda
+## route 1: fully automatic with UV
+
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/).
+
+Ensure `TBCI_MAIN_REPO_PATH="..."` is set to your repo of the main TBCI instance.
+
+### Running the script will
+
+- initialise the tests by copying them over from the main repo to here.
+- run tests on versions of python specified (>=3.11)
+- loops over the different 'instalation version' of the toolbox
+    > so aside from toolbox-continu-inzicht[all], it also checks all the possible install options [loads]/[sections]
+    > you can specify arguments to run just one with `run_tests_uv.py inspections`
+- default logging is written to test_results.log, you can enable/disable with with `run_tests_uv.py inspections log=true`/`log=false`
+- many warnings are expected, the toolbox is set up in such a way to throw warnings when missing a package. In production these can be silenced.
+- total runtime per instaltion is 2min, for 6 versions of the package and 3 (3.11, 3.12, 3.13) python verions this takes roughly half an hour so choose wisely.
+
+#### using your own environment
+
+Run `python run_tests_uv.py` to start the process of testing.
+This will call uv itself, you can have a simple python dev environment locally to run this, uv will create venv to do testing in.
+You only need `python-dotenv` & `toml` to load those the .env file.  
+
+#### using uv
+
+You can also use provided uv environment in highest directory for this.
+Not to be confused with the testing environment in `\python_environment`.
+Run `uv sync --locked` for this, a new uv environment will be made.
+Run`uv run run_tests.py`, any arguments can follow: `uv run run_tests.py loads log=false`
+
+## route 2: manually via conda
+
+(old was of doing it: more labour intesive)
 
 Replace `C:\Data\Python\TBCI\toolbox-continu-inzicht` with your own path.
 
@@ -17,7 +49,6 @@ python copy_tests.py "C:\Data\Python\TBCI\toolbox-continu-inzicht\tests"
 # install & check - run in conda termninal
 pip install "C:\Data\Python\TBCI\toolbox-continu-inzicht\src"[loads]
 python run_tests.py loads
-# missing scipy?
 
 pip install "C:\Data\Python\TBCI\toolbox-continu-inzicht\src"[inspections]
 python run_tests.py inspections
@@ -26,7 +57,7 @@ pip install "C:\Data\Python\TBCI\toolbox-continu-inzicht\src"[sections]
 python run_tests.py sections
 
 pip install "C:\Data\Python\TBCI\toolbox-continu-inzicht\src"[flood_scenarios]
-python run_tests.py flood_scenarios # geeft wat fouten op paden maar werkt wel
+python run_tests.py flood_scenarios
 
 pip install "C:\Data\Python\TBCI\toolbox-continu-inzicht\src"[fragility_curves]
 python run_tests.py fragility_curves
@@ -42,37 +73,4 @@ conda install pytest benchmark -y
 
 pip install "C:\Data\Python\TBCI\toolbox-continu-inzicht\src"[all]
 python run_tests.py all
-
-
 ```
-
-## route 2: semi-automatic with UV
-
-Replace `C:\Data\Python\TBCI\toolbox-continu-inzicht` with your own path.
-
-```bash
-cd python_environment
-uvx python ..\copy_tests.py "C:\Data\Python\TBCI\toolbox-continu-inzicht\tests"
-uvx nox -s
-```
-
-This proceeds to run the tests, but we need to loop over the toolbox versions we make availible.
-
-## route 3: fully automatic with UV
-
-Install [uv](https://docs.astral.sh/uv/getting-started/installation/).
-
-Ensure `TBCI_MAIN_REPO_PATH="..."` is set to your repo of the main TBCI instance.
-
-Run `python run_tests_uv.py` to start the process of testing. This will call uv itself, you can have a simple python dev environment locally to run this, uv will create venv to do testing in. You only need `python-dotenv` & `toml` to load those the .env file.
-
-This will:
-
-- initialise the tests by copying them over from the main repo to here.
-- run tests on versions of python specified (>=3.11)
-- loops over the different 'instalation version' of the toolbox
-    > so aside from toolbox-continu-inzicht[all], it also checks all the possible install options [loads]/[sections]
-    > you can specify to run just one with `python run_tests_uv.py inspections`
-- default logging is written to test_results.log, you can enable/disable with with `python run_tests_uv.py inspections log=true`/`log=false`
-- many warnings are expected, the toolbox is set up in such a way to throw warnings when missing a package. In production these can be silenced.
-- total runtime per instaltion is 2min, for 6 versions of the package and 3 (3.11,3.12,3.13) python verions this takes roughly half an hour.

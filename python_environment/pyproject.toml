@@ -4,4 +4,4 @@ version = "0.1.0"
 description = "Test package to "
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = [ "nox", "python-dotenv", "pytest", "pytest-benchmark", "toolbox-continu-inzicht[sections] @ file:///C:/Data/Python/TBCI/toolbox-continu-inzicht//src",]
+dependencies = [ "nox", "python-dotenv", "pytest", "pytest-benchmark", "toolbox-continu-inzicht[fragility_curves] @ file:///C:/Data/Python/TBCI/toolbox-continu-inzicht//src",]

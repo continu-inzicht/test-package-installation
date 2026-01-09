@@ -1,0 +1,49 @@
+name: Run Pytest with UV and Nox
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  merge_group:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out TBCI repository
+        uses: actions/checkout@v4 
+        with:
+          repository: continu-inzicht/toolbox-continu-inzicht
+          path: toolbox-continu-inzicht
+          lfs: true
+
+      - name: Check own repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          version: "0.9.3"
+
+      - name: Copy github secrets to environment variables files
+        working-directory: continu_inzicht
+        run: |
+            touch .env
+            echo TBCI_MAIN_REPO_PATH="/toolbox-continu-inzicht/toolbox-continu-inzicht/" >> .env
+            cat .env
+      - name: Install the project
+        run: uv sync --locked
+
+      - name: Run Pytests
+        run: uv run run_tests.py log=false # in terminal rather than log file
+
+      - name: Upload Benchmark Data
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-data
+          path: .benchmarks/
