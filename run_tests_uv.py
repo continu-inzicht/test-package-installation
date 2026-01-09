@@ -63,6 +63,11 @@ def run_tests(args):
     TBCI_MAIN_REPO_PATH = os.getenv(
         "TBCI_MAIN_REPO_PATH", "../../toolbox-continu-inzicht"
     )
+    PYTHON_VERSIONS = os.getenv(
+        "PYTHON_VERSIONS", "3.11"
+    )  # For the tests runner this is set in the test.yml
+    os.environ["PYTHON_VERSIONS"] = PYTHON_VERSIONS  # pass it to noxfile.py
+
     categories = read_main_repo_toml(TBCI_MAIN_REPO_PATH)
     # in case of arguments, only run for that category
     if len(args) > 1 and args[1] in categories:

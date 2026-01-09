@@ -15,6 +15,7 @@ TBCI_MAIN_REPO_PATH_TESTS = os.getenv(
     "TBCI_MAIN_REPO_PATH_TESTS", "../../toolbox-continu-inzicht/tests"
 )
 SUBSET_PATHS = os.getenv("SUBSET_PATHS", "")
+PYTHON_VERSIONS = os.getenv("PYTHON_VERSIONS", "3.11").split(",")
 
 
 @nox.session
@@ -27,8 +28,7 @@ def init(session):
     session.run("python", "../copy_tests.py", f"{TBCI_MAIN_REPO_PATH_TESTS}")
 
 
-@nox.session(python="3.11")
-# @nox.session(python=["3.11", "3.12", "3.13"])
+@nox.session(python=PYTHON_VERSIONS)
 def test(session):
     session.install(".[test]")
     options = session.posargs
