@@ -44,13 +44,13 @@ jobs:
         with:
           version: "0.9.3"
       
-      - name: debug
-        run: | 
-            ls ${{ github.workspace }}\test-package-installation 
-            ls ${{ github.workspace }}\toolbox-continu-inzicht
-            ls ${{ github.workspace }}\toolbox-continu-inzicht\src
-        shell: pwsh
-
+      # - name: debug
+      #   if: matrix.os == 'windows-latest'
+      #   run: | 
+      #       ls ${{ github.workspace }}\test-package-installation 
+      #       ls ${{ github.workspace }}\toolbox-continu-inzicht
+      #       ls ${{ github.workspace }}\toolbox-continu-inzicht\src
+      #   shell: pwsh
 
       - name: set environment variables files (win)
         # remove get content if add secrets later
