@@ -94,11 +94,13 @@ def run_tests(args):
 
         os.environ["SUBSET_PATHS"] = subset_paths_tests
         if log:  # easier to fix issues as teh verbose is quite long
+            cmd = ["uvx", "nox", "-s"]
             result = subprocess.run(
-                ["uvx", "nox", "-s"],
+                cmd,
                 cwd="python_environment",
                 capture_output=True,
                 text=True,
+                shell=True
             )
             write_to_log(result, subset_paths_tests, instalation_version, log_file)
         else:  # easier to see whats going on with uv/nox
