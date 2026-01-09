@@ -35,7 +35,7 @@ jobs:
       - name: Copy github secrets to environment variables files
         # remove get content if add secrets later
         run: |
-            Add-Content -Path .env -Value 'TBCI_MAIN_REPO_PATH=D:\a\test-package-installation\test-package-installation\toolbox-continu-inzicht'
+            Add-Content -Path .env -Value "TBCI_MAIN_REPO_PATH=${{ github.workspace }}/toolbox-continu-inzicht"
             Get-Content .env
         shell: pwsh
       - name: Install the project
