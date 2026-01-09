@@ -34,7 +34,7 @@ jobs:
         working-directory: continu_inzicht
         run: |
             touch .env
-            echo TBCI_MAIN_REPO_PATH="/toolbox-continu-inzicht/toolbox-continu-inzicht/" >> .env
+            echo TBCI_MAIN_REPO_PATH=" D:\a\test-package-installation\test-package-installation\toolbox-continu-inzicht" >> .env
             cat .env
       - name: Install the project
         run: uv sync --locked
