@@ -42,7 +42,7 @@ jobs:
         run: uv sync --locked
 
       - name: Run Pytests
-        run: uv run run_tests.py log=false # in terminal rather than log file
+        run: uv run run_tests_uv.py log=false # in terminal rather than log file
 
       - name: Upload Benchmark Data
         uses: actions/upload-artifact@v4
