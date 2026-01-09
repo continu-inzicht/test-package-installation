@@ -14,6 +14,9 @@ jobs:
   build:
     runs-on: windows-latest
 
+    # ${{ github.workspace }} is  the main folder
+    # the two repos are then each deployed at a lower level
+    # doing this path handleing makes the whole thing a little complex
     steps:
       - name: Check out main TBCI repository
         uses: actions/checkout@v4 
@@ -22,6 +25,9 @@ jobs:
           # we can also run this locally manuall & check on github later once in main
           repository: continu-inzicht/toolbox-continu-inzicht 
           path: toolbox-continu-inzicht
+          # CAUTION
+          # Change later!!!!
+          ref: sprint_6 
           lfs: true
 
       - name: Check own repository
@@ -41,12 +47,15 @@ jobs:
             ls ${{ github.workspace }}\toolbox-continu-inzicht
             ls ${{ github.workspace }}\toolbox-continu-inzicht\src
         shell: pwsh
-      - name: Copy github secrets to environment variables files
+
+
+      - name: set environment variables files
         # remove get content if add secrets later
         run: |
             Add-Content -Path ${{ github.workspace }}\test-package-installation\.env -Value "TBCI_MAIN_REPO_PATH=${{ github.workspace }}\toolbox-continu-inzicht"
             Get-Content ${{ github.workspace }}\test-package-installation\.env 
         shell: pwsh
+        
       - name: Install the project
         run: uv sync --locked
         working-directory: test-package-installation
