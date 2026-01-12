@@ -29,8 +29,8 @@ jobs:
           repository: continu-inzicht/toolbox-continu-inzicht 
           path: toolbox-continu-inzicht
           # CAUTION
-          # Change later!!!!
-          ref: dev 
+          # Change later to main branch?!!!!
+          ref: dev  # branch used by test workflow, set to dev as main wasn't up to date yet
           lfs: true
 
       - name: Check own repository

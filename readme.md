@@ -18,7 +18,9 @@ Ensure `TBCI_MAIN_REPO_PATH="..."` is set to your repo of the main TBCI instance
 - Default logging is written to test_results.log, you can enable/disable with with `run_tests_uv.py inspections log=true`/`log=false`
 - Many warnings are expected, the toolbox is set up in such a way to throw warnings when missing a package. In production these can be silenced.
 - Total runtime per python version is 6min, for 3 versions (3.11, 3.12, 3.13) python verions this takes roughly 15 - 30min.
-- There is an automated test on GitHub, this runs both Windows & Linux.
+- There is an automated test on GitHub, this runs both Windows & Linux. This looks at the current version on GitHub, but set to the dev branch for now (see .github\workflows\tests.yml:'Check out main TBCI repository':ref)
+Pushing to main will run this action, for example adjust the flowing sentence.
+    > This has been run for sprint 6 on 12-1-2026.
 
 #### using your own environment
 
