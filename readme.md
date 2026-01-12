@@ -77,3 +77,9 @@ conda install pytest benchmark -y
 pip install "C:\Data\Python\TBCI\toolbox-continu-inzicht\src"[all]
 python run_tests.py all
 ```
+
+## License
+
+Copyright (c) 2024 - 2026, HKV lijn in Water
+
+GPL 3.0 or later
