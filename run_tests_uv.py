@@ -75,7 +75,7 @@ def run_tests(args):
     for arg in args[1:]:
         if arg.startswith("log="):
             log_value = arg.split("=")[1]
-            log = log_value.lower() in ("y", "yes", "true", "True", "1")
+            log = log_value.lower() in ("y", "yes", "true","1")
 
     for instalation_version in categories:
         remove_venvs()
@@ -93,33 +93,39 @@ def run_tests(args):
                 subset_paths_tests = f"/{instalation_version}"
 
         os.environ["SUBSET_PATHS"] = subset_paths_tests
+        cmd = ["uvx", "nox", "-s"]
+        cwd = "python_environment"
         if log:  # easier to fix issues as teh verbose is quite long
-            cmd = ["uvx", "nox", "-s"]
             result = subprocess.run(
                 cmd,
-                cwd="python_environment",
+                cwd=cwd,
                 capture_output=True,
                 text=True,
-                shell=True
             )
             write_to_log(result, subset_paths_tests, instalation_version, log_file)
         else:  # easier to see whats going on with uv/nox
-            result = subprocess.run(
-                ["uvx", "nox", "-s"],
-                cwd="python_environment",
-                capture_output=True,
-                text=True,
-            )
-            fail=False
-            try:
-                result.check_returncode()
-            except subprocess.CalledProcessError:
-                print(f"WARNING: Tests failed for version: {instalation_version}")
-                fail=True
-            finally:
-                print(result.stdout, result.stderr)
-            if fail:
-                sys.exit(1)
+            if log_value.lower() in ('github','githubactions','ci','ci/cd'):
+                result = subprocess.run(
+                    cmd,
+                    cwd=cwd,
+                    capture_output=True,
+                    text=True,
+                )
+                fail=False
+                try:
+                    result.check_returncode()
+                except subprocess.CalledProcessError:
+                    print(f"WARNING: Tests failed for version: {instalation_version}")
+                    fail=True
+                finally:
+                    print(result.stdout, result.stderr)
+                if fail:
+                    sys.exit(1)
+            else:
+                subprocess.run(
+                    cmd,
+                    cwd=cwd,
+                )
     remove_venvs()
 
 
