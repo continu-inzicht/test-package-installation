@@ -10,14 +10,15 @@ Ensure `TBCI_MAIN_REPO_PATH="..."` is set to your repo of the main TBCI instance
 
 ### Running the script will
 
-- initialise the tests by copying them over from the main repo to here.
-- run tests on versions of python specified (>=3.11)
-- loops over the different 'instalation version' of the toolbox
+- Initialise the tests by copying them over from the main repo to here.
+- Run tests on versions of python specified (>=3.11)
+- Loops over the different 'instalation version' of the toolbox
     > so aside from toolbox-continu-inzicht[all], it also checks all the possible install options [loads]/[sections]
     > you can specify arguments to run just one with `run_tests_uv.py inspections`
-- default logging is written to test_results.log, you can enable/disable with with `run_tests_uv.py inspections log=true`/`log=false`
-- many warnings are expected, the toolbox is set up in such a way to throw warnings when missing a package. In production these can be silenced.
-- total runtime per python version is 6min, for 3 versions (3.11, 3.12, 3.13) python verions this takes roughly 15 - 30min.
+- Default logging is written to test_results.log, you can enable/disable with with `run_tests_uv.py inspections log=true`/`log=false`
+- Many warnings are expected, the toolbox is set up in such a way to throw warnings when missing a package. In production these can be silenced.
+- Total runtime per python version is 6min, for 3 versions (3.11, 3.12, 3.13) python verions this takes roughly 15 - 30min.
+- There is an automated test on GitHub, this runs both Windows & Linux. 
 
 #### using your own environment
 

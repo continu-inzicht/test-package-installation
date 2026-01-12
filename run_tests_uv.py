@@ -104,10 +104,22 @@ def run_tests(args):
             )
             write_to_log(result, subset_paths_tests, instalation_version, log_file)
         else:  # easier to see whats going on with uv/nox
-            subprocess.run(
+            result = subprocess.run(
                 ["uvx", "nox", "-s"],
                 cwd="python_environment",
+                capture_output=True,
+                text=True,
             )
+            fail=False
+            try:
+                result.check_returncode()
+            except subprocess.CalledProcessError as e:
+                print(f"WARNING: Tests failed for version: {instalation_version}")
+                fail=True
+            finally:
+                print(result.stdout, result.stderr)
+            if fail:
+                sys.exit(1)
     remove_venvs()
 
 
