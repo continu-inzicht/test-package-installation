@@ -113,7 +113,7 @@ def run_tests(args):
             fail=False
             try:
                 result.check_returncode()
-            except subprocess.CalledProcessError as e:
+            except subprocess.CalledProcessError:
                 print(f"WARNING: Tests failed for version: {instalation_version}")
                 fail=True
             finally:
