@@ -3,7 +3,7 @@ name = "test-pypi-continu-inzicht-main"
 version = "0.1.0"
 description = "Test package to "
 license = "GPL-3.0"
-license-file = "LICENSE"
+license-files = "LICENSE"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
