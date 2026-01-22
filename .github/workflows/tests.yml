@@ -30,7 +30,7 @@ jobs:
           path: toolbox-continu-inzicht
           # CAUTION
           # Change later to main branch?!!!!
-          ref: dev  # branch used by test workflow, set to dev as main wasn't up to date yet
+          ref: sprint_6 #dev  # branch used by test workflow, set to dev as main wasn't up to date yet
           lfs: true
 
       - name: Check own repository
