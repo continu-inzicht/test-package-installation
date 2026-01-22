@@ -1,6 +1,6 @@
 # Extra testing
 
-[![Run Pytest with UV and Nox](https://github.com/continu-inzicht/test-package-installation/actions/workflows/tests.yml/badge.svg)](https://github.com/continu-inzicht/test-package-installation/actions/workflows/tests.yml)
+[![Run package installation tests](https://github.com/continu-inzicht/test-package-installation/actions/workflows/tests.yml/badge.svg)](https://github.com/continu-inzicht/test-package-installation/actions/workflows/tests.yml)
 
 Check to see if splitting pypi package it works.
 
