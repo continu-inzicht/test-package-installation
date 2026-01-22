@@ -22,7 +22,7 @@ Ensure `TBCI_MAIN_REPO_PATH="..."` is set to your repo of the main TBCI instance
 - Total runtime per python version is 6min, for 3 versions (3.11, 3.12, 3.13) python verions this takes roughly 15 - 30min.
 - There is an automated test on GitHub, this runs both Windows & Linux. This looks at the current version on GitHub, but set to the dev branch for now (see .github\workflows\tests.yml:'Check out main TBCI repository':ref)
 Pushing to main will run this action, for example adjust the flowing sentence.
-    > This has been run for sprint 6 on 20-1-2026.
+    > This has been run for sprint 6 on 22-1-2026.
 
 #### using your own environment
 
