@@ -47,6 +47,9 @@ jobs:
         uses: astral-sh/setup-uv@v7
         with:
           version: "0.9.3"
+          cache-dependency-glob: |
+            **/*requirements*.txt
+          
       
       # - name: debug
       #   if: matrix.os == 'windows-latest'
