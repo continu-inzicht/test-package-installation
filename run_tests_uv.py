@@ -93,7 +93,9 @@ def run_tests(args):
                 subset_paths_tests = f"/{instalation_version}"
 
         os.environ["SUBSET_PATHS"] = subset_paths_tests
-        cmd = ["uvx", "nox", "-s"]
+        # -s without session names yields an empty selection that silently
+        # overrides nox.options.sessions, so name them explicitly
+        cmd = ["uvx", "nox", "-s", "init", "test"]
         cwd = "python_environment"
         if log:  # easier to fix issues as teh verbose is quite long
             result = subprocess.run(
