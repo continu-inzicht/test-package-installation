@@ -21,6 +21,10 @@ jobs:
     # the two repos are then each deployed at a lower level
     # doing this path handleing makes the whole thing a little complex
     steps:
+      - name: Enable Git long paths (Windows)
+        if: runner.os == 'Windows'
+        run: git config --system core.longpaths true
+        shell: pwsh
       - name: Check out main TBCI repository
         uses: actions/checkout@v4 
         with:
