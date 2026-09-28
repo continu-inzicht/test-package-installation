@@ -10,6 +10,4 @@ dependencies = [
     "pytest", 
     "pytest-benchmark",
     "toolbox-continu-inzicht[all] @ file:///C:/Data/Python/TBCI/toolbox-continu-inzicht//src",
-    # TODO: remove once fixed in parent package
-    "pandas<3",
     ]
